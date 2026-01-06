@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Victor Bucarey — Homepage</title>
+  <style>
+    :root{
+      --bg: #ffffff;
+      --ink: #222;     /* text */
+      --muted:#666;
+      --line:#e6e6e6;
+      --link:#3b78cc;  /* accessible blue */
+      --accent:#f6f8ff;
+      --maxw: 860px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0f0954; --ink:#f7f7f7; --muted:#61cd79; --line:#262a33; --link:#8adcff; --accent:#0b0b0d;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font: 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0}
+    .wrap{max-width:var(--maxw);margin:auto;padding:18px 16px}
+    .brand{font-weight:700;font-size:20px}
+    nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .menu a{padding:6px 8px;border-radius:8px}
+    .menu a:focus,.menu a:hover{background:var(--accent)}
+    main{max-width:var(--maxw);margin:auto;padding:20px 16px}
+    h1{margin:8px 0 2px;font-size:28px}
+    h2{margin:18px 0 10px;font-size:20px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:18px}
+    .grid2{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
+    @media (max-width:700px){.grid2{grid-template-columns:1fr}}
+    .card{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg)}
+    .list{margin:0;padding-left:18px}
+    .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    footer{border-top:1px solid var(--line)}
+    .tag{display:inline-block;margin:2px 6px 0 0;padding:2px 8px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted)}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+    .profile-pic{width:100%;max-width:180px;border-radius:12px;border:1px solid var(--line);object-fit:cover}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand">Victor Bucarey</div>
+        <div class="menu">
+          <a href="..\">Home</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="wrap">
+     
+          <h1>Publications</h1>
+
+      <h2>Journal Articles</h2>
+ <ol class="publications">
+  <li>
+    Bustamante, P., <strong>Bucarey, V.</strong>, Labbé, M., Marianov, V., &amp; Ordoñez, F. (2025).
+    Novel valid inequalities and branch-and-price for Stackelberg Security Games.
+    <em>Computers &amp; Operations Research</em>.
+    <a href="https://doi.org/10.1016/j.cor.2025.107122">https://doi.org/10.1016/j.cor.2025.107122</a>
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, González-Blanco, N., Labbé, M., &amp; Mesa, J. A. (2025).
+    On λ-cent-dians and generalized-center for network design: formulations and algorithms.
+    <em>Annals of Operations Research</em> (Accepted).
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, González-Blanco, N., Labbé, M., &amp; Mesa, J. A. (2025).
+    On λ-cent-dians and generalized-center for network design: definitions and properties.
+    <em>Annals of Operations Research</em>.
+    <a href="https://doi.org/10.1007/s10479-025-06536-5">https://doi.org/10.1007/s10479-025-06536-5</a>
+  </li>
+
+  <li>
+    Mandi, J., Kotary, J., Berden, S., Mulamba, M., <strong>Bucarey, V.</strong>, Guns, T., &amp; Fioretto, F. (2024).
+    Decision-focused learning: Foundations, state of the art, benchmark and future opportunities.
+    <em>Journal of Artificial Intelligence Research</em>, 80, 1623–1701.
+  </li>
+
+  <li>
+    Bustamante, P., <strong>Bucarey, V.</strong>, Labbé, M., Marianov, V., &amp; Ordoñez, F. (2024).
+    Playing Stackelberg Security Games in Perfect Formulations.
+    <em>Omega</em>.
+    <a href="https://doi.org/10.1016/j.omega.2024.103068">https://doi.org/10.1016/j.omega.2024.103068</a>
+  </li>
+
+  <li>
+    Canoy, R., <strong>Bucarey, V.</strong>, Mandi, J., Mulamba, M., Molenbruch, Y., &amp; Guns, T. (2024).
+    Probability estimation and structured output prediction for learning preferences in last mile delivery.
+    <em>Computers &amp; Industrial Engineering</em>, 109932.
+    (Preprint: <a href="https://arxiv.org/abs/2201.10269">arXiv:2201.10269</a>)
+  </li>
+
+  <li>
+    Canoy, R., <strong>Bucarey, V.</strong>, Mandi, J., &amp; Guns, T. (2023).
+    Learn and route: learning implicit preferences for vehicle routing.
+    <em>Constraints</em>, 28, 363–396.
+    <a href="https://doi.org/10.1007/s10601-023-09363-2">https://doi.org/10.1007/s10601-023-09363-2</a>
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, Della Vecchia, E., Jean-Marie, A., &amp; Ordoñez, F. (2022).
+    Stationary Strong Stackelberg Equilibrium in Discounted Games.
+    <em>IEEE Transactions on Automatic Control</em>.
+    <a href="https://doi.org/10.1109/TAC.2022.3220512">https://doi.org/10.1109/TAC.2022.3220512</a>
+  </li>
+
+  <li>
+    Jean-Marie, A., Tidball, M., &amp; <strong>Bucarey, V.</strong> (2021).
+    The Stackelberg games of water extraction with myopic agents.
+    <em>International Game Theory Review</em>.
+    <a href="https://doi.org/10.1142/S0219198921500237">https://doi.org/10.1142/S0219198921500237</a>
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, Casorrán, C., Labbé, M., Ordoñez, F., &amp; Figueroa, O. (2021).
+    Coordinating resources in Stackelberg security games.
+    <em>European Journal of Operational Research</em>, 291(3), 846–861.
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, Labbé, M., Morales, J. M., &amp; Pineda, S. (2021).
+    An exact dynamic programming approach to segmented isotonic regression.
+    <em>Omega</em>.
+    <a href="https://doi.org/10.1016/j.omega.2021.102516">https://doi.org/10.1016/j.omega.2021.102516</a>
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, Fortz, B., González-Blanco, N., Labbé, M., &amp; Mesa, J. A. (2021).
+    Benders decomposition for Network Design Covering Problems.
+    <em>Computers &amp; Operations Research</em>.
+    <a href="https://doi.org/10.1016/j.cor.2021.105417">https://doi.org/10.1016/j.cor.2021.105417</a>
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, Elloumi, S., Labbé, M., &amp; Plein, F. (2020).
+    Models and Algorithms for the Product Pricing with Single-Minded Customers Requesting Bundles.
+    <em>Computers &amp; Operations Research</em>.
+    <a href="https://doi.org/10.1016/j.cor.2020.105139">https://doi.org/10.1016/j.cor.2020.105139</a>
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, Ordoñez, F., &amp; Bassaletti, E. (2015).
+    Shape and Balance in Police Districting.
+    In <em>Applications of Location Analysis</em> (pp. 329–347). Springer International Publishing.
+  </li>
+</ol>
+      <p class="muted" style="margin-top:8px">Full list: <a href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ" target="_blank" rel="noopener">Google Scholar</a></p>
+    </section>
+
+   
+
+
+
+   <section id="proceedings" class="wrap">
+      <h2>Peer-reviewed proceedings</h2>
+
+    <ol class="publications">
+  <li>
+    <strong>Bucarey, V.</strong>, Calderón, S., Muñoz, G., &amp; Semet, F. (2024).
+    Decision-focused predictions via pessimistic bilevel optimization: a computational study.
+    <em>CPAIOR 2024</em>.
+  </li>
+
+  <li>
+    Castillo, P., <strong>Bucarey, V.</strong>, Dávila, S., &amp; Quezada, F. (2024).
+    Balancing Resources and Demand: A Bi-Objective Mixed-Integer Programming Approach of Healthcare Districts in Chile.
+    In <em>Proceedings of the 13th International Conference on Operations Research and Enterprise Systems (ICORES)</em>, pp. 341–349.
+    DOI: <a href="https://doi.org/10.5220/0012410100003639">10.5220/0012410100003639</a>
+  </li>
+
+  <li>
+    Mandi, J., <strong>Bucarey, V.</strong>, Tchomba, M. M. K., &amp; Guns, T. (2022).
+    Decision-Focused Learning: Through the Lens of Learning to Rank.
+    In <em>Proceedings of the 39th International Conference on Machine Learning (ICML)</em>, PMLR 162, pp. 14935–14947.
+  </li>
+
+  <li>
+    Mandi, J., Canoy, R., <strong>Bucarey, V.</strong>, &amp; Guns, T. (2021).
+    Data Driven VRP: A Neural Network Model to Learn Hidden Preferences for VRP.
+    In <em>27th International Conference on Principles and Practice of Constraint Programming (CP 2021)</em>.
+  </li>
+
+  <li>
+    Mulamba, M., Mandi, J., Diligenti, M., Lombardi, M., <strong>Bucarey, V.</strong>, &amp; Guns, T. (2021).
+    Contrastive Losses and Solution Caching for Predict-and-Optimize.
+    In <em>30th International Joint Conference on Artificial Intelligence (IJCAI-21)</em>, pp. 2833–2840.
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, &amp; Labbé, M. (2019).
+    Discussion of Fairness and Implementability in Stackelberg Security Games.
+    <em>Decision and Game Theory for Security: 10th International Conference (GameSec 2019)</em>.
+  </li>
+
+  <li>
+    <strong>Bucarey, V.</strong>, Casorrán, C., Figueroa, O., Rosas, K., Navarrete, H., &amp; Ordoñez, F. (2017).
+    Building Real Stackelberg Security Games for Border Patrols.
+    <em>Decision and Game Theory for Security: 8th International Conference (GameSec 2017)</em>.
+  </li>
+
+  <li>
+    Zhang, C., <strong>Bucarey, V.</strong>, Mukhopadhyay, A., Sinha, A., Qian, Y., Vorobeychik, Y., &amp; Tambe, M. (2016).
+    Using Abstractions to Solve Opportunistic Crime Security Games at Scale.
+    In <em>Proceedings of the 15th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2016)</em>.
+  </li>
+</ol>
+</section>
+
+  <footer>
+    <div class="wrap" style="font-size:14px; color:var(--muted); padding-bottom:24px">
+      © <span id="y">2025</span> Victor Bucarey. Last updated 2025-10-14.
+    </div>
+  </footer>
+</body>
+</html>

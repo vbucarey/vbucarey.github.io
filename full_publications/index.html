@@ -1,230 +1,403 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Victor Bucarey — Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Publications by Víctor Bucarey in optimization, machine learning, and game theory.">
+  <title>Publications · Víctor Bucarey</title>
   <style>
-    :root{
-      --bg: #ffffff;
-      --ink: #222;     /* text */
-      --muted:#666;
-      --line:#e6e6e6;
-      --link:#3b78cc;  /* accessible blue */
-      --accent:#f6f8ff;
-      --maxw: 860px;
+    :root { color-scheme:light dark; --bg:#faf9f6; --surface:#fff; --ink:#202b35; --muted:#56636f; --accent:#076b69; --soft:#eaf3f0; --line:#dce2df; }
+    @media(prefers-color-scheme:dark) { :root { --bg:#131b22; --surface:#19232c; --ink:#edf1f4; --muted:#b1bdc8; --accent:#91d7cc; --soft:#213835; --line:#35424d; } }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    html { scroll-padding-top:90px; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1px; }
+    button,input { font:inherit; }
+    a:focus-visible,button:focus-visible,input:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    .container { width:min(1080px,calc(100% - 48px)); margin-inline:auto; }
+    .skip-link { position:absolute; top:-100px; left:16px; padding:10px 16px; z-index:10; background:var(--surface); }
+    .skip-link:focus { top:12px; }
+    .site-header { position:sticky; top:0; z-index:5; border-bottom:1px solid var(--line); background:var(--bg); }
+    nav { min-height:68px; display:flex; justify-content:space-between; align-items:center; gap:18px; }
+    .brand { color:var(--ink); font-size:17px; font-weight:700; text-decoration:none; letter-spacing:-.03em; }
+    .nav-links { display:flex; flex-wrap:wrap; gap:20px; }
+    .nav-links a { color:var(--muted); font-size:13px; text-decoration:none; }
+    .nav-links a:hover { color:var(--accent); }
+    .intro { padding:38px 0 24px; }
+    .eyebrow { margin:0 0 9px; color:var(--accent); font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+    h1 { margin:0; font:400 clamp(36px,5vw,48px)/1.12 Georgia,"Times New Roman",serif; letter-spacing:-.035em; }
+    .intro-text { margin:12px 0 0; color:var(--muted); font-size:14px; }
+    .toolbar { padding:16px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .controls { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+    .filters { display:flex; flex-wrap:wrap; gap:6px; }
+    .filter { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:40px; padding:7px 11px; border:1px solid transparent; border-radius:5px; background:transparent; color:var(--muted); font-size:13px; cursor:pointer; }
+    .filter:hover { background:var(--soft); color:var(--accent); }
+    .filter[aria-pressed="true"] { background:var(--soft); border-color:var(--accent); color:var(--accent); font-weight:600; }
+    .filter .count { font-size:11px; font-variant-numeric:tabular-nums; }
+    .search { display:flex; align-items:center; width:290px; min-width:200px; min-height:40px; padding:0 12px; border:1px solid var(--line); border-radius:5px; background:var(--surface); color:var(--muted); gap:9px; }
+    .search svg { flex:0 0 16px; }
+    .search input { width:100%; min-width:0; padding:9px 0; border:0; background:transparent; color:var(--ink); font-size:13px; }
+    .search input::placeholder { color:var(--muted); opacity:1; }
+    .search:focus-within { outline:2px solid var(--accent); outline-offset:3px; }
+    .search input:focus-visible { outline:0; }
+    .results-status { margin:12px 0 0; font-size:12px; color:var(--muted); }
+    .year-group { display:grid; grid-template-columns:70px minmax(0,1fr); gap:28px; padding:22px 0 8px; }
+    .year-group+.year-group { border-top:1px solid var(--line); }
+    .year-group h2 { margin:9px 0 0; color:var(--accent); font:400 26px/1.2 Georgia,"Times New Roman",serif; font-variant-numeric:tabular-nums; }
+    .publication-list { margin:0; padding:0; list-style:none; }
+    .publication { padding:11px 0 13px; }
+    .publication+.publication { border-top:1px solid var(--line); }
+    h3 { margin:0; font-size:15px; font-weight:650; line-height:1.45; }
+    h3 a { color:var(--ink); text-decoration:none; }
+    h3 a:hover { color:var(--accent); text-decoration:underline; }
+    .authors { margin:4px 0; color:var(--muted); font-size:12px; line-height:1.5; }
+    .authors strong { color:var(--ink); font-weight:600; }
+    .metadata { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; font-size:12px; color:var(--muted); }
+    .venue { min-width:0; }
+    .kind { font-size:10px; line-height:1.5; padding:1px 6px; border:1px solid var(--line); border-radius:3px; white-space:nowrap; }
+    .resources { display:flex; flex-wrap:wrap; gap:12px; margin-left:auto; }
+    .resources a { font-weight:600; text-decoration:none; }
+    .resources a:hover { text-decoration:underline; }
+    .empty { padding:50px 0; color:var(--muted); text-align:center; }
+    .reset { margin-top:10px; min-height:40px; padding:8px 15px; border:1px solid var(--line); border-radius:5px; color:var(--accent); background:var(--surface); cursor:pointer; }
+    .bottom-links { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; padding:28px 0; font-size:13px; border-top:1px solid var(--line); }
+    footer { padding:18px 0 28px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    @media(max-width:780px) {
+      .controls { align-items:stretch; flex-direction:column; gap:12px; }
+      .search { width:100%; }
+      .year-group { grid-template-columns:54px minmax(0,1fr); gap:18px; }
+      .resources { margin-left:0; }
     }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0f0954; --ink:#f7f7f7; --muted:#61cd79; --line:#262a33; --link:#8adcff; --accent:#0b0b0d;
-      }
+    @media(max-width:480px) {
+      .container { width:calc(100% - 32px); }
+      nav { min-height:64px; gap:12px; }
+      .nav-links { gap:12px; }
+      .nav-links .nav-cv { display:none; }
+      .intro { padding-top:28px; }
+      .filters { gap:4px; }
+      .filter { padding:7px 9px; }
+      .year-group { grid-template-columns:1fr; gap:7px; padding-top:18px; }
+      .year-group h2 { font-size:23px; margin:0; }
+      h3 { font-size:14px; }
+      .authors { line-height:1.6; }
     }
-    *{box-sizing:border-box}
-    html,body{margin:0}
-    body{font: 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    header{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0}
-    .wrap{max-width:var(--maxw);margin:auto;padding:18px 16px}
-    .brand{font-weight:700;font-size:20px}
-    nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-    .menu a{padding:6px 8px;border-radius:8px}
-    .menu a:focus,.menu a:hover{background:var(--accent)}
-    main{max-width:var(--maxw);margin:auto;padding:20px 16px}
-    h1{margin:8px 0 2px;font-size:28px}
-    h2{margin:18px 0 10px;font-size:20px}
-    .muted{color:var(--muted)}
-    .grid{display:grid;gap:18px}
-    .grid2{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
-    @media (max-width:700px){.grid2{grid-template-columns:1fr}}
-    .card{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg)}
-    .list{margin:0;padding-left:18px}
-    .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-    footer{border-top:1px solid var(--line)}
-    .tag{display:inline-block;margin:2px 6px 0 0;padding:2px 8px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted)}
-    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
-    .profile-pic{width:100%;max-width:180px;border-radius:12px;border:1px solid var(--line);object-fit:cover}
+    @media print {
+      :root { --bg:white; --ink:black; --muted:#444; --accent:black; --line:#ddd; }
+      .site-header,.toolbar,.bottom-links,.skip-link,.empty,footer { display:none !important; }
+      body { font-size:10pt; }
+      .container { width:100%; }
+      .intro { padding:0 0 12px; }
+      .year-group { display:block; padding-top:12px; }
+      .year-group h2 { margin:0 0 5px; break-after:avoid; }
+      .publication { break-inside:avoid; }
+      h3 { font-size:11pt; }
+      .authors,.metadata { font-size:9pt; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <nav>
-        <div class="brand">Victor Bucarey</div>
-        <div class="menu">
-          <a href="..\">Home</a>
-        </div>
-      </nav>
-    </div>
+  <a class="skip-link" href="#main">Skip to publications</a>
+  <header class="site-header">
+    <nav class="container" aria-label="Main navigation">
+      <a class="brand" href="../">Víctor Bucarey</a>
+      <div class="nav-links"><a href="../">← Home</a><a class="nav-cv" href="https://vbucarey.github.io/assets/CV_VBL.pdf">CV</a><a href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ">Scholar ↗</a></div>
+    </nav>
   </header>
-
-  <main>
-    <section id="about" class="wrap">
-     
-          <h1>Publications</h1>
-
-      <h2>Journal Articles</h2>
- <ol class="publications">
-  <li>
-    Bustamante, P., <strong>Bucarey, V.</strong>, Labbé, M., Marianov, V., &amp; Ordoñez, F. (2025).
-    Novel valid inequalities and branch-and-price for Stackelberg Security Games.
-    <em>Computers &amp; Operations Research</em>.
-    <a href="https://doi.org/10.1016/j.cor.2025.107122">https://doi.org/10.1016/j.cor.2025.107122</a>
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, González-Blanco, N., Labbé, M., &amp; Mesa, J. A. (2025).
-    On λ-cent-dians and generalized-center for network design: formulations and algorithms.
-    <em>Annals of Operations Research</em> (Accepted).
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, González-Blanco, N., Labbé, M., &amp; Mesa, J. A. (2025).
-    On λ-cent-dians and generalized-center for network design: definitions and properties.
-    <em>Annals of Operations Research</em>.
-    <a href="https://doi.org/10.1007/s10479-025-06536-5">https://doi.org/10.1007/s10479-025-06536-5</a>
-  </li>
-
-  <li>
-    Mandi, J., Kotary, J., Berden, S., Mulamba, M., <strong>Bucarey, V.</strong>, Guns, T., &amp; Fioretto, F. (2024).
-    Decision-focused learning: Foundations, state of the art, benchmark and future opportunities.
-    <em>Journal of Artificial Intelligence Research</em>, 80, 1623–1701.  (Open access article: <a href="https://www.jair.org/index.php/jair/article/view/15320">(link)</a>)
-  </li>
-
-  <li>
-    Bustamante, P., <strong>Bucarey, V.</strong>, Labbé, M., Marianov, V., &amp; Ordoñez, F. (2024).
-    Playing Stackelberg Security Games in Perfect Formulations.
-    <em>Omega</em>.
-    <a href="https://doi.org/10.1016/j.omega.2024.103068">https://doi.org/10.1016/j.omega.2024.103068</a>
-  </li>
-
-  <li>
-    Canoy, R., <strong>Bucarey, V.</strong>, Mandi, J., Mulamba, M., Molenbruch, Y., &amp; Guns, T. (2024).
-    Probability estimation and structured output prediction for learning preferences in last mile delivery.
-    <em>Computers &amp; Industrial Engineering</em>, 109932.
-    (Preprint: <a href="https://arxiv.org/abs/2201.10269">arXiv:2201.10269</a>)
-  </li>
-
-  <li>
-    Canoy, R., <strong>Bucarey, V.</strong>, Mandi, J., &amp; Guns, T. (2023).
-    Learn and route: learning implicit preferences for vehicle routing.
-    <em>Constraints</em>, 28, 363–396.
-    <a href="https://doi.org/10.1007/s10601-023-09363-2">https://doi.org/10.1007/s10601-023-09363-2</a>
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, Della Vecchia, E., Jean-Marie, A., &amp; Ordoñez, F. (2022).
-    Stationary Strong Stackelberg Equilibrium in Discounted Games.
-    <em>IEEE Transactions on Automatic Control</em>.
-    <a href="https://doi.org/10.1109/TAC.2022.3220512">https://doi.org/10.1109/TAC.2022.3220512</a>
-  </li>
-
-  <li>
-    Jean-Marie, A., Tidball, M., &amp; <strong>Bucarey, V.</strong> (2021).
-    The Stackelberg games of water extraction with myopic agents.
-    <em>International Game Theory Review</em>.
-    <a href="https://doi.org/10.1142/S0219198921500237">https://doi.org/10.1142/S0219198921500237</a>
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, Casorrán, C., Labbé, M., Ordoñez, F., &amp; Figueroa, O. (2021).
-    Coordinating resources in Stackelberg security games.
-    <em>European Journal of Operational Research</em>, 291(3), 846–861.
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, Labbé, M., Morales, J. M., &amp; Pineda, S. (2021).
-    An exact dynamic programming approach to segmented isotonic regression.
-    <em>Omega</em>.
-    <a href="https://doi.org/10.1016/j.omega.2021.102516">https://doi.org/10.1016/j.omega.2021.102516</a>
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, Fortz, B., González-Blanco, N., Labbé, M., &amp; Mesa, J. A. (2021).
-    Benders decomposition for Network Design Covering Problems.
-    <em>Computers &amp; Operations Research</em>.
-    <a href="https://doi.org/10.1016/j.cor.2021.105417">https://doi.org/10.1016/j.cor.2021.105417</a>
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, Elloumi, S., Labbé, M., &amp; Plein, F. (2020).
-    Models and Algorithms for the Product Pricing with Single-Minded Customers Requesting Bundles.
-    <em>Computers &amp; Operations Research</em>.
-    <a href="https://doi.org/10.1016/j.cor.2020.105139">https://doi.org/10.1016/j.cor.2020.105139</a>
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, Ordoñez, F., &amp; Bassaletti, E. (2015).
-    Shape and Balance in Police Districting.
-    In <em>Applications of Location Analysis</em> (pp. 329–347). Springer International Publishing.
-  </li>
-</ol>
-      <p class="muted" style="margin-top:8px">Full list: <a href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ" target="_blank" rel="noopener">Google Scholar</a></p>
-    </section>
-
-   
-
-
-
-   <section id="proceedings" class="wrap">
-      <h2>Peer-reviewed proceedings</h2>
-
-    <ol class="publications">
-  <li>
-    <strong>Bucarey, V.</strong>, Calderón, S., Muñoz, G., &amp; Semet, F. (2024).
-    Decision-focused predictions via pessimistic bilevel optimization: a computational study.
-    <em>CPAIOR 2024</em>.
-  </li>
-
-  <li>
-    Castillo, P., <strong>Bucarey, V.</strong>, Dávila, S., &amp; Quezada, F. (2024).
-    Balancing Resources and Demand: A Bi-Objective Mixed-Integer Programming Approach of Healthcare Districts in Chile.
-    In <em>Proceedings of the 13th International Conference on Operations Research and Enterprise Systems (ICORES)</em>, pp. 341–349.
-    DOI: <a href="https://doi.org/10.5220/0012410100003639">10.5220/0012410100003639</a>
-  </li>
-
-  <li>
-    Mandi, J., <strong>Bucarey, V.</strong>, Tchomba, M. M. K., &amp; Guns, T. (2022).
-    Decision-Focused Learning: Through the Lens of Learning to Rank.
-    In <em>Proceedings of the 39th International Conference on Machine Learning (ICML)</em>, PMLR 162, pp. 14935–14947.
-  </li>
-
-  <li>
-    Mandi, J., Canoy, R., <strong>Bucarey, V.</strong>, &amp; Guns, T. (2021).
-    Data Driven VRP: A Neural Network Model to Learn Hidden Preferences for VRP.
-    In <em>27th International Conference on Principles and Practice of Constraint Programming (CP 2021)</em>.
-  </li>
-
-  <li>
-    Mulamba, M., Mandi, J., Diligenti, M., Lombardi, M., <strong>Bucarey, V.</strong>, &amp; Guns, T. (2021).
-    Contrastive Losses and Solution Caching for Predict-and-Optimize.
-    In <em>30th International Joint Conference on Artificial Intelligence (IJCAI-21)</em>, pp. 2833–2840.
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, &amp; Labbé, M. (2019).
-    Discussion of Fairness and Implementability in Stackelberg Security Games.
-    <em>Decision and Game Theory for Security: 10th International Conference (GameSec 2019)</em>.
-  </li>
-
-  <li>
-    <strong>Bucarey, V.</strong>, Casorrán, C., Figueroa, O., Rosas, K., Navarrete, H., &amp; Ordoñez, F. (2017).
-    Building Real Stackelberg Security Games for Border Patrols.
-    <em>Decision and Game Theory for Security: 8th International Conference (GameSec 2017)</em>.
-  </li>
-
-  <li>
-    Zhang, C., <strong>Bucarey, V.</strong>, Mukhopadhyay, A., Sinha, A., Qian, Y., Vorobeychik, Y., &amp; Tambe, M. (2016).
-    Using Abstractions to Solve Opportunistic Crime Security Games at Scale.
-    In <em>Proceedings of the 15th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2016)</em>.
-  </li>
-</ol>
-</section>
-
-  <footer>
-    <div class="wrap" style="font-size:14px; color:var(--muted); padding-bottom:24px">
-      © <span id="y">2025</span> Victor Bucarey. Last updated 2025-10-14.
+  <main id="main" class="container">
+    <div class="intro">
+      <p class="eyebrow">Research archive</p>
+      <h1>Publications</h1>
+      <p class="intro-text">Journal articles, peer-reviewed proceedings, and book chapters · 2015–2026</p>
     </div>
-  </footer>
+    <!-- Filters enhance the static list; all publications remain readable without JavaScript. -->
+    <div class="toolbar" id="toolbar" hidden>
+      <div class="controls">
+        <div class="filters" role="group" aria-label="Publication type">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="count">24</span></button>
+          <button class="filter" type="button" data-filter="journal" aria-pressed="false">Journals <span class="count">15</span></button>
+          <button class="filter" type="button" data-filter="proceedings" aria-pressed="false">Proceedings <span class="count">8</span></button>
+          <button class="filter" type="button" data-filter="chapter" aria-pressed="false">Chapters <span class="count">1</span></button>
+        </div>
+        <label class="search">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+          <input type="search" id="search" aria-label="Search publications by title, author, venue, or year" placeholder="Search title, author, venue…" autocomplete="off">
+        </label>
+      </div>
+      <p class="results-status" id="results-status" role="status" aria-live="polite" aria-atomic="true">Showing all 24 publications</p>
+    </div>
+    <div id="publication-groups">
+      <section class="year-group" aria-labelledby="year-2026">
+        <h2 id="year-2026">2026</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1016/j.cie.2026.112398">Machine learning-enhanced column generation for large-scale capacity planning problems</a></h3>
+              <p class="authors">Keim, F., <strong>Bucarey, V.</strong>, Zhang, Q., &amp; Flores-Quiroz, A.</p>
+              <div class="metadata"><span class="venue"><em>Computers &amp; Industrial Engineering</em> · 222, 112398</span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1016/j.cie.2026.112398" aria-label="DOI: Machine learning-enhanced column generation for large-scale capacity planning problems">DOI <span aria-hidden="true">↗</span></a><a href="https://optimization-online.org/2025/12/machine-learning-enhanced-column-generation-for-large-scale-capacity-planning-problems/" aria-label="Preprint: Machine learning-enhanced column generation for large-scale capacity planning problems">Preprint <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1007/s10589-026-00818-9">Decision-focused predictions via pessimistic bilevel optimization: complexity and algorithms</a></h3>
+              <p class="authors"><strong>Bucarey López, V.</strong>, Calderón, S., Muñoz, G., &amp; Semet, F.</p>
+              <div class="metadata"><span class="venue"><em>Computational Optimization and Applications</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1007/s10589-026-00818-9" aria-label="DOI: Decision-focused predictions via pessimistic bilevel optimization: complexity and algorithms">DOI <span aria-hidden="true">↗</span></a><a href="https://optimization-online.org/2024/11/decision-focused-predictions-via-pessimistic-bilevel-optimization-complexity-and-algorithms/" aria-label="Preprint: Decision-focused predictions via pessimistic bilevel optimization: complexity and algorithms">Preprint <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2025">
+        <h2 id="year-2025">2025</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1016/j.cor.2025.107122">Novel valid inequalities and branch-and-price for Stackelberg Security Games</a></h3>
+              <p class="authors">Bustamante, P., <strong>Bucarey, V.</strong>, Labbé, M., Marianov, V., &amp; Ordoñez, F.</p>
+              <div class="metadata"><span class="venue"><em>Computers &amp; Operations Research</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1016/j.cor.2025.107122" aria-label="DOI: Novel valid inequalities and branch-and-price for Stackelberg Security Games">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3>On λ-cent-dians and generalized-center for network design: formulations and algorithms</h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, González-Blanco, N., Labbé, M., &amp; Mesa, J. A.</p>
+              <div class="metadata"><span class="venue"><em>Annals of Operations Research</em> · Accepted</span><span class="kind">Journal</span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1007/s10479-025-06536-5">On λ-cent-dians and generalized-center for network design: definitions and properties</a></h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, González-Blanco, N., Labbé, M., &amp; Mesa, J. A.</p>
+              <div class="metadata"><span class="venue"><em>Annals of Operations Research</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1007/s10479-025-06536-5" aria-label="DOI: On λ-cent-dians and generalized-center for network design: definitions and properties">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2024">
+        <h2 id="year-2024">2024</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://www.jair.org/index.php/jair/article/view/15320">Decision-focused learning: Foundations, state of the art, benchmark and future opportunities</a></h3>
+              <p class="authors">Mandi, J., Kotary, J., Berden, S., Mulamba, M., <strong>Bucarey, V.</strong>, Guns, T., &amp; Fioretto, F.</p>
+              <div class="metadata"><span class="venue"><em>Journal of Artificial Intelligence Research</em> · 80, 1623–1701</span><span class="kind">Journal</span><span class="resources"><a href="https://www.jair.org/index.php/jair/article/view/15320" aria-label="Open access: Decision-focused learning: Foundations, state of the art, benchmark and future opportunities">Open access <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1016/j.omega.2024.103068">Playing Stackelberg Security Games in Perfect Formulations</a></h3>
+              <p class="authors">Bustamante, P., <strong>Bucarey, V.</strong>, Labbé, M., Marianov, V., &amp; Ordoñez, F.</p>
+              <div class="metadata"><span class="venue"><em>Omega</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1016/j.omega.2024.103068" aria-label="DOI: Playing Stackelberg Security Games in Perfect Formulations">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://arxiv.org/abs/2201.10269">Probability estimation and structured output prediction for learning preferences in last mile delivery</a></h3>
+              <p class="authors">Canoy, R., <strong>Bucarey, V.</strong>, Mandi, J., Mulamba, M., Molenbruch, Y., &amp; Guns, T.</p>
+              <div class="metadata"><span class="venue"><em>Computers &amp; Industrial Engineering</em> · 109932</span><span class="kind">Journal</span><span class="resources"><a href="https://arxiv.org/abs/2201.10269" aria-label="Preprint: Probability estimation and structured output prediction for learning preferences in last mile delivery">Preprint <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3>Decision-focused predictions via pessimistic bilevel optimization: a computational study</h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Calderón, S., Muñoz, G., &amp; Semet, F.</p>
+              <div class="metadata"><span class="venue"><em>CPAIOR 2024</em></span><span class="kind">Proceedings</span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3><a href="https://doi.org/10.5220/0012410100003639">Balancing Resources and Demand: A Bi-Objective Mixed-Integer Programming Approach of Healthcare Districts in Chile</a></h3>
+              <p class="authors">Castillo, P., <strong>Bucarey, V.</strong>, Dávila, S., &amp; Quezada, F.</p>
+              <div class="metadata"><span class="venue"><em>13th International Conference on Operations Research and Enterprise Systems (ICORES)</em> · 341–349</span><span class="kind">Proceedings</span><span class="resources"><a href="https://doi.org/10.5220/0012410100003639" aria-label="DOI: Balancing Resources and Demand: A Bi-Objective Mixed-Integer Programming Approach of Healthcare Districts in Chile">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2023">
+        <h2 id="year-2023">2023</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1007/s10601-023-09363-2">Learn and route: learning implicit preferences for vehicle routing</a></h3>
+              <p class="authors">Canoy, R., <strong>Bucarey, V.</strong>, Mandi, J., &amp; Guns, T.</p>
+              <div class="metadata"><span class="venue"><em>Constraints</em> · 28, 363–396</span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1007/s10601-023-09363-2" aria-label="DOI: Learn and route: learning implicit preferences for vehicle routing">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2022">
+        <h2 id="year-2022">2022</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1109/TAC.2022.3220512">Stationary Strong Stackelberg Equilibrium in Discounted Games</a></h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Della Vecchia, E., Jean-Marie, A., &amp; Ordoñez, F.</p>
+              <div class="metadata"><span class="venue"><em>IEEE Transactions on Automatic Control</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1109/TAC.2022.3220512" aria-label="DOI: Stationary Strong Stackelberg Equilibrium in Discounted Games">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3>Decision-Focused Learning: Through the Lens of Learning to Rank</h3>
+              <p class="authors">Mandi, J., <strong>Bucarey, V.</strong>, Tchomba, M. M. K., &amp; Guns, T.</p>
+              <div class="metadata"><span class="venue"><em>39th International Conference on Machine Learning (ICML)</em> · PMLR 162, 14935–14947</span><span class="kind">Proceedings</span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2021">
+        <h2 id="year-2021">2021</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1142/S0219198921500237">The Stackelberg games of water extraction with myopic agents</a></h3>
+              <p class="authors">Jean-Marie, A., Tidball, M., &amp; <strong>Bucarey, V.</strong></p>
+              <div class="metadata"><span class="venue"><em>International Game Theory Review</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1142/S0219198921500237" aria-label="DOI: The Stackelberg games of water extraction with myopic agents">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3>Coordinating resources in Stackelberg security games</h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Casorrán, C., Labbé, M., Ordoñez, F., &amp; Figueroa, O.</p>
+              <div class="metadata"><span class="venue"><em>European Journal of Operational Research</em> · 291(3), 846–861</span><span class="kind">Journal</span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1016/j.omega.2021.102516">An exact dynamic programming approach to segmented isotonic regression</a></h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Labbé, M., Morales, J. M., &amp; Pineda, S.</p>
+              <div class="metadata"><span class="venue"><em>Omega</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1016/j.omega.2021.102516" aria-label="DOI: An exact dynamic programming approach to segmented isotonic regression">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1016/j.cor.2021.105417">Benders decomposition for Network Design Covering Problems</a></h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Fortz, B., González-Blanco, N., Labbé, M., &amp; Mesa, J. A.</p>
+              <div class="metadata"><span class="venue"><em>Computers &amp; Operations Research</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1016/j.cor.2021.105417" aria-label="DOI: Benders decomposition for Network Design Covering Problems">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3>Data Driven VRP: A Neural Network Model to Learn Hidden Preferences for VRP</h3>
+              <p class="authors">Mandi, J., Canoy, R., <strong>Bucarey, V.</strong>, &amp; Guns, T.</p>
+              <div class="metadata"><span class="venue"><em>27th International Conference on Principles and Practice of Constraint Programming (CP 2021)</em></span><span class="kind">Proceedings</span></div>
+            </article>
+          </li>
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3>Contrastive Losses and Solution Caching for Predict-and-Optimize</h3>
+              <p class="authors">Mulamba, M., Mandi, J., Diligenti, M., Lombardi, M., <strong>Bucarey, V.</strong>, &amp; Guns, T.</p>
+              <div class="metadata"><span class="venue"><em>30th International Joint Conference on Artificial Intelligence (IJCAI-21)</em> · 2833–2840</span><span class="kind">Proceedings</span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2020">
+        <h2 id="year-2020">2020</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="journal">
+            <article>
+              <h3><a href="https://doi.org/10.1016/j.cor.2020.105139">Models and Algorithms for the Product Pricing with Single-Minded Customers Requesting Bundles</a></h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Elloumi, S., Labbé, M., &amp; Plein, F.</p>
+              <div class="metadata"><span class="venue"><em>Computers &amp; Operations Research</em></span><span class="kind">Journal</span><span class="resources"><a href="https://doi.org/10.1016/j.cor.2020.105139" aria-label="DOI: Models and Algorithms for the Product Pricing with Single-Minded Customers Requesting Bundles">DOI <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2019">
+        <h2 id="year-2019">2019</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3>Discussion of Fairness and Implementability in Stackelberg Security Games</h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, &amp; Labbé, M.</p>
+              <div class="metadata"><span class="venue"><em>Decision and Game Theory for Security: 10th International Conference (GameSec 2019)</em></span><span class="kind">Proceedings</span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2017">
+        <h2 id="year-2017">2017</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3>Building Real Stackelberg Security Games for Border Patrols</h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Casorrán, C., Figueroa, O., Rosas, K., Navarrete, H., &amp; Ordoñez, F.</p>
+              <div class="metadata"><span class="venue"><em>Decision and Game Theory for Security: 8th International Conference (GameSec 2017)</em></span><span class="kind">Proceedings</span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2016">
+        <h2 id="year-2016">2016</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="proceedings">
+            <article>
+              <h3>Using Abstractions to Solve Opportunistic Crime Security Games at Scale</h3>
+              <p class="authors">Zhang, C., <strong>Bucarey, V.</strong>, Mukhopadhyay, A., Sinha, A., Qian, Y., Vorobeychik, Y., &amp; Tambe, M.</p>
+              <div class="metadata"><span class="venue"><em>15th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2016)</em></span><span class="kind">Proceedings</span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+      <section class="year-group" aria-labelledby="year-2015">
+        <h2 id="year-2015">2015</h2>
+        <ol class="publication-list" role="list">
+          <li class="publication" data-type="chapter">
+            <article>
+              <h3>Shape and Balance in Police Districting</h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Ordoñez, F., &amp; Bassaletti, E.</p>
+              <div class="metadata"><span class="venue"><em>Applications of Location Analysis</em> · 329–347 · Springer International Publishing</span><span class="kind">Book chapter</span></div>
+            </article>
+          </li>
+        </ol>
+      </section>
+    </div>
+    <div class="empty" id="empty" hidden>
+      <p>No publications match your search.</p>
+      <button class="reset" id="reset" type="button">Clear search and filters</button>
+    </div>
+    <div class="bottom-links"><a href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ">View Google Scholar ↗</a><a href="../">← Back to homepage</a></div>
+  </main>
+  <footer><div class="container">© Víctor Bucarey</div></footer>
+  <script>
+    (() => {
+      const toolbar = document.getElementById('toolbar');
+      const input = document.getElementById('search');
+      const status = document.getElementById('results-status');
+      const empty = document.getElementById('empty');
+      const buttons = [...document.querySelectorAll('[data-filter]')];
+      const rows = [...document.querySelectorAll('.publication')];
+      const groups = [...document.querySelectorAll('.year-group')];
+      const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      const index = rows.map(row => ({
+        row,
+        text: normalize(row.textContent + ' ' + row.closest('.year-group').querySelector('h2').textContent)
+      }));
+      let type = 'all';
+      const names = { all:'all types', journal:'journal articles', proceedings:'proceedings', chapter:'book chapters' };
+      function update() {
+        const query = input.value.trim();
+        const terms = normalize(query).split(/\s+/).filter(Boolean);
+        let visible = 0;
+        for (const { row, text } of index) {
+          const matches = (type === 'all' || row.dataset.type === type) && terms.every(term => text.includes(term));
+          row.hidden = !matches;
+          if (matches) visible++;
+        }
+        for (const group of groups) {
+          group.hidden = ![...group.querySelectorAll('.publication')].some(row => !row.hidden);
+        }
+        buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === type)));
+        empty.hidden = visible !== 0;
+        status.textContent = type === 'all' && !query
+          ? `Showing all ${rows.length} publications`
+          : `Showing ${visible} publication${visible === 1 ? '' : 's'} · ${names[type]}${query ? ` · “${query}”` : ''}`;
+      }
+      buttons.forEach(button => button.addEventListener('click', () => { type = button.dataset.filter; update(); }));
+      input.addEventListener('input', update);
+      document.getElementById('reset').addEventListener('click', () => { type = 'all'; input.value = ''; update(); input.focus(); });
+      toolbar.hidden = false;
+      update();
+    })();
+  </script>
 </body>
 </html>

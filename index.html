@@ -1,180 +1,707 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Victor Bucarey — Homepage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Víctor Bucarey | Optimization & Decision Making</title>
+  <meta name="description"
+        content="Víctor Bucarey, Associate Professor at Universidad de O'Higgins. Research in bilevel optimization, decision-focused learning, and game theory.">
+
   <style>
-    :root{
-      --bg: #ffffff;
-      --ink: #222;     /* text */
-      --muted:#666;
-      --line:#e6e6e6;
-      --link:#0b57d0;  /* accessible blue */
-      --accent:#f6f8ff;
-      --maxw: 860px;
+    :root {
+      color-scheme: light dark;
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --ink: #202b35;
+      --muted: #56636f;
+      --accent: #076b69;
+      --accent-soft: #eaf3f0;
+      --line: #dce2df;
+      --width: 1060px;
     }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0f0954; --ink:#f7f7f7; --muted:#61cd79; --line:#262a33; --link:#8adcff; --accent:#0b0b0d;
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #131b22;
+        --surface: #19232c;
+        --ink: #edf1f4;
+        --muted: #b1bdc8;
+        --accent: #91d7cc;
+        --accent-soft: #213835;
+        --line: #35424d;
       }
     }
-    *{box-sizing:border-box}
-    html,body{margin:0}
-    body{font: 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    header{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0}
-    .wrap{max-width:var(--maxw);margin:auto;padding:18px 16px}
-    .brand{font-weight:700;font-size:20px}
-    nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-    .menu a{padding:6px 8px;border-radius:8px}
-    .menu a:focus,.menu a:hover{background:var(--accent)}
-    main{max-width:var(--maxw);margin:auto;padding:20px 16px}
-    h1{margin:8px 0 2px;font-size:28px}
-    h2{margin:18px 0 10px;font-size:20px}
-    .muted{color:var(--muted)}
-    .grid{display:grid;gap:18px}
-    .grid2{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
-    @media (max-width:700px){.grid2{grid-template-columns:1fr}}
-    .card{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg)}
-    .list{margin:0;padding-left:18px}
-    .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-    footer{border-top:1px solid var(--line)}
-    .tag{display:inline-block;margin:2px 6px 0 0;padding:2px 8px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted)}
-    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
-    .profile-pic{width:100%;max-width:180px;border-radius:12px;border:1px solid var(--line);object-fit:cover}
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 17px/1.7 system-ui, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 5px;
+      border-radius: 3px;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 6vw, 4.4rem);
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    p + p { margin-top: 1rem; }
+
+    .container {
+      width: min(var(--width), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 10;
+      padding: 10px 16px;
+      background: var(--surface);
+    }
+
+    .skip-link:focus { top: 12px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navigation {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 22px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 64px;
+      align-items: center;
+      padding-block: 80px 68px;
+    }
+
+    .eyebrow {
+      margin-bottom: 16px;
+      color: var(--accent);
+      font-size: 0.77rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .role {
+      margin-top: 18px;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .intro {
+      max-width: 58ch;
+      margin-top: 24px;
+      font-size: 1.15rem;
+      line-height: 1.65;
+    }
+
+    .bio {
+      max-width: 62ch;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .portrait {
+      width: 230px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 25%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      box-shadow: 12px 12px 0 var(--accent-soft);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 9px 17px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .button-primary:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .topics li {
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .section {
+      padding-block: 46px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+
+    .section-heading > a {
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .paper {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 20px;
+      padding-block: 24px;
+    }
+
+    .paper + .paper { border-top: 1px solid var(--line); }
+
+    .year {
+      padding-top: 2px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .paper h3 a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .paper h3 a:hover { color: var(--accent); }
+
+    .paper-meta {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.89rem;
+    }
+
+    .paper-resource {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.84rem;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      border-top: 1px solid var(--line);
+    }
+
+    .two-columns .section { border-top: 0; }
+
+    .detail-list {
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .detail-list li + li { margin-top: 24px; }
+
+    .detail-list p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .contact p { margin-top: 16px; }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 18px;
+      font-size: 0.9rem;
+    }
+
+    address {
+      align-self: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: normal;
+    }
+
+    .email { overflow-wrap: anywhere; }
+
+    footer {
+      padding-block: 24px 36px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 145px; }
+
+      .container { width: min(var(--width), calc(100% - 36px)); }
+
+      .navigation {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        padding-block: 14px;
+      }
+
+      .nav-links { gap: 8px 18px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-block: 44px;
+      }
+
+      .portrait {
+        grid-row: 1;
+        width: 136px;
+        box-shadow: 7px 7px 0 var(--accent-soft);
+      }
+
+      .intro { font-size: 1.06rem; }
+
+      .section { padding-block: 34px; }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .paper {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .two-columns { grid-template-columns: 1fr; gap: 0; }
+
+      .two-columns .section + .section {
+        border-top: 1px solid var(--line);
+      }
+
+      .contact { flex-direction: column; }
+      address { align-self: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    @media print {
+      .site-header, .skip-link { display: none; }
+
+      body {
+        background: white;
+        color: black;
+        font-size: 11pt;
+      }
+
+      .container { width: 100%; }
+      .hero { padding-block: 20px; }
+      .paper { break-inside: avoid; }
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="wrap">
-      <nav>
-        <div class="brand">Victor Bucarey</div>
-        <div class="menu">
-          <a href="#publications">Publications</a>
-          <a href="#teaching">Teaching</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
-    </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container navigation" aria-label="Main navigation">
+      <a class="brand" href="#about">Víctor Bucarey</a>
+
+      <div class="nav-links">
+        <a href="#publications">Research</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
   </header>
 
-  <main>
-    <section id="about" class="wrap">
-      <div class="grid2">
-        <div>
-          <img src="images/prof_pic.jpg" alt="Profile picture of Victor Bucarey" class="profile-pic">
+  <main id="main" class="container">
+    <section id="about" class="hero" aria-labelledby="name">
+      <div>
+        <p class="eyebrow">Optimization · Learning · Game Theory</p>
+
+        <h1 id="name">Víctor Bucarey</h1>
+
+        <p class="role">
+          Associate Professor · Universidad de O’Higgins
+        </p>
+
+        <p class="intro">
+          I develop models and algorithms for better decision making,
+          bringing together mathematical optimization, machine learning,
+          and game theory.
+        </p>
+
+        <p class="bio">
+          My research focuses on bilevel optimization, decision-focused
+          learning, and large-scale computational problems. I hold a Ph.D.
+          in Systems Engineering from the University of Chile and enjoy
+          sharing research through science outreach.
+        </p>
+
+        <div class="actions">
+          <a class="button button-primary" href="/assets/CV_VBL.pdf">
+            Curriculum vitae
+          </a>
+
+          <a class="button"
+             href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ">
+            Google Scholar
+          </a>
+
+          <a class="button" href="mailto:victor.bucarey@uoh.cl">
+            Get in touch
+          </a>
         </div>
+
+        <ul class="topics" aria-label="Research interests">
+          <li>Bilevel optimization</li>
+          <li>Decision-focused learning</li>
+          <li>Security games</li>
+          <li>Network design</li>
+        </ul>
+      </div>
+
+      <img class="portrait"
+           src="images/prof_pic.jpg"
+           alt="Víctor Bucarey"
+           width="230"
+           height="288"
+           fetchpriority="high">
+    </section>
+
+    <section id="publications" class="section"
+             aria-labelledby="publications-title">
+      <div class="section-heading">
+        <h2 id="publications-title">Selected publications</h2>
+        <a href="/full_publications/index.html">
+          All publications →
+        </a>
+      </div>
+
+      <article class="paper">
+        <div class="year">2026</div>
         <div>
-          <h1>Victor Bucarey</h1>
-          <p class="muted">
-            I’m Víctor Bucarey, an Industrial Civil Engineer with a Ph.D. in Systems Engineering from the University of Chile. I’m currently an Associate Professor at the University of O’Higgins. My work focuses on data-driven decision making, computational game theory, and large-scale optimization. These days, I’m exploring how learning methods can tackle hard combinatorial problems and how to design efficient algorithms that combine prediction with optimization. 
-            I also enjoy taking part in different science outreach projects to share research with a broader audience.
-            </p>
-          <p>
-            <span class="tag">Bilevel Optimization</span>
-            <span class="tag">Decision-Focused Learning</span>
-            <span class="tag">Security Games</span>
-            <span class="tag">Network Design</span>
+          <h3>
+            <a href="https://optimization-online.org/2025/12/machine-learning-enhanced-column-generation-for-large-scale-capacity-planning-problems/">
+              Machine learning–enhanced column generation for
+              large-scale capacity planning problems
+            </a>
+          </h3>
+          <p class="paper-meta">
+            Computers &amp; Industrial Engineering
           </p>
+          <a class="paper-resource"
+             href="https://optimization-online.org/2025/12/machine-learning-enhanced-column-generation-for-large-scale-capacity-planning-problems/">
+            Read manuscript →
+          </a>
+        </div>
+      </article>
+
+      <article class="paper">
+        <div class="year">2026</div>
+        <div>
+          <h3>
+            <a href="https://doi.org/10.1007/s10589-026-00818-9">
+              Decision-focused predictions via pessimistic bilevel
+              optimization: complexity and algorithms
+            </a>
+          </h3>
+          <p class="paper-meta">
+            Computational Optimization and Applications
+          </p>
+          <a class="paper-resource"
+             href="https://doi.org/10.1007/s10589-026-00818-9">
+            Published article →
+          </a>
+        </div>
+      </article>
+
+      <article class="paper">
+        <div class="year">2025</div>
+        <div>
+          <h3>
+            <a href="https://doi.org/10.1016/j.cor.2025.107122">
+              Novel valid inequalities and branch-and-price
+              for Stackelberg Security Games
+            </a>
+          </h3>
+          <p class="paper-meta">Computers &amp; Operations Research</p>
+          <a class="paper-resource"
+             href="https://doi.org/10.1016/j.cor.2025.107122">
+            Published article →
+          </a>
+        </div>
+      </article>
+
+      <article class="paper">
+        <div class="year">2025</div>
+        <div>
+          <h3>
+            <a href="https://link.springer.com/article/10.1007/s10479-025-06583-y">
+              On λ-cent-dians and generalized-center for network
+              design: formulations and algorithms
+            </a>
+          </h3>
+          <p class="paper-meta">Annals of Operations Research</p>
+          <a class="paper-resource"
+             href="https://link.springer.com/article/10.1007/s10479-025-06583-y">
+            Published article →
+          </a>
+        </div>
+      </article>
+
+      <article class="paper">
+        <div class="year">2024</div>
+        <div>
+          <h3>
+            <a href="https://arxiv.org/abs/2201.10269">
+              Probability estimation and structured output prediction
+              for learning preferences in last mile delivery
+            </a>
+          </h3>
+          <p class="paper-meta">
+            Computers &amp; Industrial Engineering
+          </p>
+          <a class="paper-resource"
+             href="https://arxiv.org/abs/2201.10269">
+            Read preprint →
+          </a>
+        </div>
+      </article>
+
+      <article class="paper">
+        <div class="year" aria-hidden="true">—</div>
+        <div>
+          <h3>
+            <a href="https://ieeexplore.ieee.org/abstract/document/9942288">
+              Stationary Strong Stackelberg Equilibrium
+              in Discounted Games
+            </a>
+          </h3>
+          <p class="paper-meta">
+            IEEE Transactions on Automatic Control
+          </p>
+          <a class="paper-resource"
+             href="https://ieeexplore.ieee.org/abstract/document/9942288">
+            Published article →
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <div class="two-columns">
+      <section id="teaching" class="section"
+               aria-labelledby="teaching-title">
+        <h2 id="teaching-title">Teaching</h2>
+
+        <ul class="detail-list">
+          <li>
+            <h3>Advanced Optimization</h3>
+            <p>Integer programming and large-scale optimization.</p>
+          </li>
+          <li>
+            <h3>Simulation &amp; Markovian Processes</h3>
+            <p>Discrete-event simulation with Arena and Python.</p>
+          </li>
+          <li>
+            <h3>Logistics &amp; Manufacturing</h3>
+            <p>Facility location, network design, and routing.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="projects" class="section"
+               aria-labelledby="projects-title">
+        <h2 id="projects-title">Research projects</h2>
+
+        <ul class="detail-list">
+          <li>
+            <h3>
+              Mixed-integer quadratic bilevel optimization
+            </h3>
+            <p>
+              Algorithms for security and decision-focused learning.<br>
+              FONDECYT Regular · 2026–2030
+            </p>
+          </li>
+          <li>
+            <h3>
+              Decision-Focused Learning under the Lens of
+              Mathematical Programming
+            </h3>
+            <p>FONDECYT Iniciación · 2022–2025</p>
+          </li>
+          <li>
+            <h3>MICCHI</h3>
+            <p>
+              Mechanisms &amp; Incentives Against Water Crisis.<br>
+              FOVI · 2023–2024
+            </p>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <section id="contact" class="section contact"
+             aria-labelledby="contact-title">
+      <div>
+        <h2 id="contact-title">Contact</h2>
+
+        <p>
+          <a class="email" href="mailto:victor.bucarey@uoh.cl">
+            victor.bucarey@uoh.cl
+          </a>
+        </p>
+
+        <div class="contact-links">
+          <a href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ">
+            Google Scholar
+          </a>
+          <a href="https://orcid.org/0000-0002-3043-8404">ORCID</a>
+          <a href="https://github.com/vbucarey">GitHub</a>
         </div>
       </div>
-    </section>
 
-       <section id="publications" class="wrap">
-      <h2>Publications (selected)</h2>
-      <ol class="list">
-         <li>
-        <strong>Keim, F., Bucarey, V., Zhang, Q., & Flores-Quiroz, A. (2026). Machine learning–enhanced column generation for large-scale capacity planning problems. 
-        <em>Computers & Industrial Engineering</em>.
-        <a href="https://doi.org/10.1007/s10589-026-00818-9">(published version)</a>
-          </li>
-        <li>
-        <strong>Decision-focused predictions via pessimistic bilevel optimization: complexity and algorithms</strong> —
-        V. Bucarey López, S. Calderón, G. Muñoz, F. Semet, 2026.
-        <em>Computational Optimization and Applications</em>.
-        <a href="https://doi.org/10.1007/s10589-026-00818-9">(published version)</a>
-          </li>
-        <li>
-          <strong>Novel valid inequalities and branch-and-price for Stackelberg Security Games</strong> —
-          Bustamante, P., Bucarey, V., Labbe, M., Marianov, V., & Ordoñez, F. <em>Computers and Operations Research</em>, 2025. 
-          <a href="https://doi.org/10.1016/j.cor.2025.107122" target="_blank" rel="noopener">link</a>
-        </li>
-        <li>
-          <strong>On λ-cent-dians and generalized-center for network design: formulations and algorithms. </strong> — V. Bucarey, B. Fortz, N. González-Blanco, M. Labbé, J.A. Mesa.
-          Bucarey, V., González-Blanco, N., Labbé, M. & Mesa, J. A.
-          <em>Annals of Operations Research.</em>, 2025. 
-          <a href="https://link.springer.com/article/10.1007/s10479-025-06583-y" target="_blank" rel="noopener">link</a>
-        </li>
-        <li>
-          <strong>Probability estimation and structured output prediction for learning preferences in last mile delivery</strong> — V. Bucarey. 
-          Canoy, R., Bucarey, V., Mandi, J., Mulamba, M., Molenbruch, Y. & Guns, T. 
-          <em>Computers & Industrial Engineering</em>, 2024. 
-          <a href="https://arxiv.org/abs/2201.10269" target="_blank" rel="noopener">doi</a>
-        </li>
-        <li><strong>Stationary Strong Stackelberg Equilibrium in Discounted Games</strong>
-            Bucarey, V., Della Vecchia, E., Jean-Marie, A., Ordoñez, F. 
-        <em>IEEE Transaction on Automatic Control. </em>
-        </li>
-
-      </ol>
-      <a href="https://ieeexplore.ieee.org/abstract/document/9942288" target="_blank" rel="noopener">link</a>
-    </section>
-
-    
-
-    <section id="preprints" class="wrap">
-      <h2>Preprints </h2>
-      <ol class="list">
-        <li>
-          <strong>Machine Learning–Enhanced Column Generation for Large-Scale Capacity Planning Problems</strong> —
-          Felipe Keim, Victor Bucarey, Qi Zhang, Angela Flores-Quiroz, 2025. <a href="https://optimization-online.org/2025/12/machine-learning-enhanced-column-generation-for-large-scale-capacity-planning-problems/" target="_blank" rel="noopener">(pre-print online)</a>
-          
-        </li>
-      </ol>
-      <p class="muted" style="margin-top:8px">Full list: <a href="/full_publications/index.html">here!</a></p>
-    </section>
-
-     
-
-    <section id="teaching" class="wrap">
-      <h2>Teaching</h2>
-      <ul class="list">
-        <li><strong>Advanced Optimization</strong> — Integer & large scale optimization (UOH)</li>
-        <li><strong>Simulation & Markovian Processes</strong> — DES with Arena & Python (UOH)</li>
-        <li><strong>Logistics & Manufacturing</strong> — Facility location, network design, routing (UOH)</li>
-      </ul>
-    </section>
-
-    <section id="projects" class="wrap">
-      <h2>Projects</h2>
-      <ul class="list">
-        <li>Mixed-integer quadratic bilevel optimization algorithms for security and decision-focused learning, FONDECYT Regular, 2026-2030.
-        <li>Decision-Focused Learning under the leans of mathematical programming (Fondecyt Iniciacion 2022-2025)</li>
-        <li>MICCHI — Mechanisms & Incentives Against Water Crisis (FOVI 2023-2024)</li>
-      </ul>
-          <p class="muted" style="margin-top:8px">You can see the detailed list of publications and projects in my  <a href="/assets/CV_VBL.pdf" target="_blank" rel="noopener">CV</a></p>
-
-    </section>
-
-    <section id="contact" class="wrap">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:victor.bucarey@uoh.cl">victor.bucarey@uoh.cl</a><br>
-         Scholar: <a href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ" target="_blank" rel="noopener">profile</a> · ORCID: <a href="https://orcid.org/0000-0002-3043-8404
-" target="_blank" rel="noopener">link</a> · GitHub: <a href="https://github.com/vbucarey" target="_blank" rel="noopener">link</a>
-      </p>
-      <address class="muted">Institute of Engineering Sciences (ICI), Universidad de O'Higgins — Rancagua, Chile</address>
+      <address>
+        Institute of Engineering Sciences<br>
+        Universidad de O’Higgins<br>
+        Rancagua, Chile
+      </address>
     </section>
   </main>
 
-
-
   <footer>
-    <div class="wrap" style="font-size:14px; color:var(--muted); padding-bottom:24px">
-      © <span id="y">2025</span> Victor Bucarey. Last updated 2025-10-14.
-    </div>
+    <div class="container">© Víctor Bucarey</div>
   </footer>
 </body>
 </html>

@@ -11,25 +11,23 @@
   <style>
     :root {
       color-scheme: light dark;
-      --bg: #faf9f6;
+      --bg: #fbfbfa;
       --surface: #ffffff;
-      --ink: #202b35;
-      --muted: #56636f;
-      --accent: #076b69;
-      --accent-soft: #eaf3f0;
-      --line: #dce2df;
-      --width: 1060px;
+      --ink: #252930;
+      --muted: #61666e;
+      --accent: #40566d;
+      --line: #dedfe2;
+      --width: 1000px;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #131b22;
-        --surface: #19232c;
-        --ink: #edf1f4;
-        --muted: #b1bdc8;
-        --accent: #91d7cc;
-        --accent-soft: #213835;
-        --line: #35424d;
+        --bg: #181a1d;
+        --surface: #202328;
+        --ink: #eceef0;
+        --muted: #b4b8bf;
+        --accent: #bac9d9;
+        --line: #353a41;
       }
     }
 
@@ -74,19 +72,19 @@
     }
 
     h1 {
-      font-size: clamp(2.7rem, 6vw, 4.4rem);
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
       line-height: 1.1;
     }
 
     h2 {
-      font-size: clamp(1.9rem, 3.5vw, 2.4rem);
+      font-size: clamp(1.6rem, 3.5vw, 2rem);
       line-height: 1.2;
     }
 
     h3 {
       font-size: 1.08rem;
       line-height: 1.45;
-      font-weight: 650;
+      font-weight: 600;
     }
 
     p + p { margin-top: 1rem; }
@@ -116,7 +114,7 @@
     }
 
     .navigation {
-      min-height: 76px;
+      min-height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -147,23 +145,14 @@
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 230px;
-      gap: 64px;
+      grid-template-columns: minmax(0, 1fr) 190px;
+      gap: 48px;
       align-items: center;
-      padding-block: 80px 68px;
-    }
-
-    .eyebrow {
-      margin-bottom: 16px;
-      color: var(--accent);
-      font-size: 0.77rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      padding-block: 60px 48px;
     }
 
     .role {
-      margin-top: 18px;
+      margin-top: 14px;
       font-size: 1rem;
       color: var(--muted);
     }
@@ -171,7 +160,7 @@
     .intro {
       max-width: 58ch;
       margin-top: 24px;
-      font-size: 1.15rem;
+      font-size: 1.06rem;
       line-height: 1.65;
     }
 
@@ -183,74 +172,31 @@
     }
 
     .portrait {
-      width: 230px;
+      width: 190px;
+      height: auto;
       aspect-ratio: 4 / 5;
       object-fit: cover;
       object-position: center 25%;
-      border-radius: 12px;
+      border-radius: 3px;
       border: 1px solid var(--line);
-      box-shadow: 12px 12px 0 var(--accent-soft);
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 28px;
+      gap: 4px 24px;
+      margin-top: 20px;
     }
 
-    .button {
+    .actions a {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       min-height: 44px;
-      padding: 9px 17px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: var(--surface);
-      color: var(--ink);
       font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .button-primary {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    .button-primary:hover {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    .topics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 28px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .topics li {
-      padding: 4px 10px;
-      border-radius: 4px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 500;
     }
 
     .section {
-      padding-block: 46px;
+      padding-block: 40px;
       border-top: 1px solid var(--line);
     }
 
@@ -300,6 +246,12 @@
       display: inline-block;
       margin-top: 8px;
       font-size: 0.84rem;
+    }
+
+    .paper-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 20px;
     }
 
     .two-columns {
@@ -379,8 +331,7 @@
 
       .portrait {
         grid-row: 1;
-        width: 136px;
-        box-shadow: 7px 7px 0 var(--accent-soft);
+        width: 120px;
       }
 
       .intro { font-size: 1.06rem; }
@@ -413,6 +364,14 @@
     }
 
     @media print {
+      :root {
+        --bg: white;
+        --ink: black;
+        --muted: #444;
+        --accent: black;
+        --line: #ddd;
+      }
+
       .site-header, .skip-link { display: none; }
 
       body {
@@ -436,7 +395,8 @@
       <a class="brand" href="#about">Víctor Bucarey</a>
 
       <div class="nav-links">
-        <a href="#publications">Research</a>
+        <a href="#preprints">Preprints</a>
+        <a href="#publications">Publications</a>
         <a href="#teaching">Teaching</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
@@ -447,8 +407,6 @@
   <main id="main" class="container">
     <section id="about" class="hero" aria-labelledby="name">
       <div>
-        <p class="eyebrow">Optimization · Learning · Game Theory</p>
-
         <h1 id="name">Víctor Bucarey</h1>
 
         <p class="role">
@@ -469,26 +427,18 @@
         </p>
 
         <div class="actions">
-          <a class="button button-primary" href="/assets/CV_VBL.pdf">
+          <a href="/assets/CV_VBL.pdf">
             Curriculum vitae
           </a>
 
-          <a class="button"
-             href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ">
+          <a href="https://scholar.google.com/citations?user=S9AA3J0AAAAJ">
             Google Scholar
           </a>
 
-          <a class="button" href="mailto:victor.bucarey@uoh.cl">
+          <a href="mailto:victor.bucarey@uoh.cl">
             Get in touch
           </a>
         </div>
-
-        <ul class="topics" aria-label="Research interests">
-          <li>Bilevel optimization</li>
-          <li>Decision-focused learning</li>
-          <li>Security games</li>
-          <li>Network design</li>
-        </ul>
       </div>
 
       <img class="portrait"
@@ -497,6 +447,37 @@
            width="230"
            height="288"
            fetchpriority="high">
+    </section>
+
+    <section id="preprints" class="section" aria-labelledby="preprints-title">
+      <div class="section-heading">
+        <h2 id="preprints-title">Preprints</h2>
+      </div>
+
+      <article class="paper">
+        <div class="year">2026</div>
+        <div>
+          <h3>
+            <a href="https://optimization-online.org/2026/10/mixed-integer-linear-reformulations-of-pessimistic-bilinear-bilevel-infima/">
+              Mixed-Integer Linear Reformulations of Pessimistic
+              Bilinear Bilevel Infima
+            </a>
+          </h3>
+          <p class="paper-meta">
+            Víctor Bucarey, Martine Labbé, Gonzalo Muñoz, and Martin Schmidt
+          </p>
+          <div class="paper-links">
+            <a class="paper-resource"
+               href="https://optimization-online.org/wp-content/uploads/2026/10/pessimistic-sl-milp.pdf">
+              Read preprint (PDF) →
+            </a>
+            <a class="paper-resource"
+               href="https://optimization-online.org/2026/10/mixed-integer-linear-reformulations-of-pessimistic-bilinear-bilevel-infima/">
+              Optimization Online →
+            </a>
+          </div>
+        </div>
+      </article>
     </section>
 
     <section id="publications" class="section"

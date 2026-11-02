@@ -6,8 +6,8 @@
   <meta name="description" content="Publications by Víctor Bucarey in optimization, machine learning, and game theory.">
   <title>Publications · Víctor Bucarey</title>
   <style>
-    :root { color-scheme:light dark; --bg:#faf9f6; --surface:#fff; --ink:#202b35; --muted:#56636f; --accent:#076b69; --soft:#eaf3f0; --line:#dce2df; }
-    @media(prefers-color-scheme:dark) { :root { --bg:#131b22; --surface:#19232c; --ink:#edf1f4; --muted:#b1bdc8; --accent:#91d7cc; --soft:#213835; --line:#35424d; } }
+    :root { color-scheme:light dark; --bg:#fbfbfa; --surface:#fff; --ink:#252930; --muted:#61666e; --accent:#40566d; --soft:#f1f3f5; --line:#dedfe2; }
+    @media(prefers-color-scheme:dark) { :root { --bg:#181a1d; --surface:#202328; --ink:#eceef0; --muted:#b4b8bf; --accent:#bac9d9; --soft:#282c32; --line:#353a41; } }
     * { box-sizing:border-box; }
     [hidden] { display:none !important; }
     html { scroll-padding-top:90px; }
@@ -15,7 +15,7 @@
     a { color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1px; }
     button,input { font:inherit; }
     a:focus-visible,button:focus-visible,input:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
-    .container { width:min(1080px,calc(100% - 48px)); margin-inline:auto; }
+    .container { width:min(1000px,calc(100% - 48px)); margin-inline:auto; }
     .skip-link { position:absolute; top:-100px; left:16px; padding:10px 16px; z-index:10; background:var(--surface); }
     .skip-link:focus { top:12px; }
     .site-header { position:sticky; top:0; z-index:5; border-bottom:1px solid var(--line); background:var(--bg); }
@@ -25,7 +25,6 @@
     .nav-links a { color:var(--muted); font-size:13px; text-decoration:none; }
     .nav-links a:hover { color:var(--accent); }
     .intro { padding:38px 0 24px; }
-    .eyebrow { margin:0 0 9px; color:var(--accent); font-size:11px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
     h1 { margin:0; font:400 clamp(36px,5vw,48px)/1.12 Georgia,"Times New Roman",serif; letter-spacing:-.035em; }
     .intro-text { margin:12px 0 0; color:var(--muted); font-size:14px; }
     .toolbar { padding:16px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
@@ -55,7 +54,7 @@
     .authors strong { color:var(--ink); font-weight:600; }
     .metadata { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; font-size:12px; color:var(--muted); }
     .venue { min-width:0; }
-    .kind { font-size:10px; line-height:1.5; padding:1px 6px; border:1px solid var(--line); border-radius:3px; white-space:nowrap; }
+    .kind { font-size:11px; white-space:nowrap; }
     .resources { display:flex; flex-wrap:wrap; gap:12px; margin-left:auto; }
     .resources a { font-weight:600; text-decoration:none; }
     .resources a:hover { text-decoration:underline; }
@@ -106,15 +105,15 @@
   </header>
   <main id="main" class="container">
     <div class="intro">
-      <p class="eyebrow">Research archive</p>
       <h1>Publications</h1>
-      <p class="intro-text">Journal articles, peer-reviewed proceedings, and book chapters · 2015–2026</p>
+      <p class="intro-text">Preprints, journal articles, peer-reviewed proceedings, and book chapters · 2015–2026</p>
     </div>
     <!-- Filters enhance the static list; all publications remain readable without JavaScript. -->
     <div class="toolbar" id="toolbar" hidden>
       <div class="controls">
         <div class="filters" role="group" aria-label="Publication type">
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="count">24</span></button>
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All <span class="count">25</span></button>
+          <button class="filter" type="button" data-filter="preprint" aria-pressed="false">Preprints <span class="count">1</span></button>
           <button class="filter" type="button" data-filter="journal" aria-pressed="false">Journals <span class="count">15</span></button>
           <button class="filter" type="button" data-filter="proceedings" aria-pressed="false">Proceedings <span class="count">8</span></button>
           <button class="filter" type="button" data-filter="chapter" aria-pressed="false">Chapters <span class="count">1</span></button>
@@ -124,12 +123,19 @@
           <input type="search" id="search" aria-label="Search publications by title, author, venue, or year" placeholder="Search title, author, venue…" autocomplete="off">
         </label>
       </div>
-      <p class="results-status" id="results-status" role="status" aria-live="polite" aria-atomic="true">Showing all 24 publications</p>
+      <p class="results-status" id="results-status" role="status" aria-live="polite" aria-atomic="true">Showing all 25 publications</p>
     </div>
     <div id="publication-groups">
       <section class="year-group" aria-labelledby="year-2026">
         <h2 id="year-2026">2026</h2>
         <ol class="publication-list" role="list">
+          <li class="publication" data-type="preprint">
+            <article>
+              <h3><a href="https://optimization-online.org/2026/10/mixed-integer-linear-reformulations-of-pessimistic-bilinear-bilevel-infima/">Mixed-Integer Linear Reformulations of Pessimistic Bilinear Bilevel Infima</a></h3>
+              <p class="authors"><strong>Bucarey, V.</strong>, Labbé, M., Muñoz, G., &amp; Schmidt, M.</p>
+              <div class="metadata"><span class="venue"><em>Optimization Online</em> · October 2026</span><span class="kind">Preprint</span><span class="resources"><a href="https://optimization-online.org/wp-content/uploads/2026/10/pessimistic-sl-milp.pdf" aria-label="PDF: Mixed-Integer Linear Reformulations of Pessimistic Bilinear Bilevel Infima">PDF <span aria-hidden="true">↗</span></a></span></div>
+            </article>
+          </li>
           <li class="publication" data-type="journal">
             <article>
               <h3><a href="https://doi.org/10.1016/j.cie.2026.112398">Machine learning-enhanced column generation for large-scale capacity planning problems</a></h3>
@@ -373,7 +379,7 @@
         text: normalize(row.textContent + ' ' + row.closest('.year-group').querySelector('h2').textContent)
       }));
       let type = 'all';
-      const names = { all:'all types', journal:'journal articles', proceedings:'proceedings', chapter:'book chapters' };
+      const names = { all:'all types', preprint:'preprints', journal:'journal articles', proceedings:'proceedings', chapter:'book chapters' };
       function update() {
         const query = input.value.trim();
         const terms = normalize(query).split(/\s+/).filter(Boolean);
